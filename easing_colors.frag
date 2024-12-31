@@ -8,13 +8,14 @@ uniform float u_time;
 vec3 colorA = vec3(0.912,0.269,0.003);
 vec3 colorB = vec3(0.376,1.000,0.002);
 
-
+// using quartic power to ease between 0.0 and 1.0
 float easeInOutQuart(float x) {
 return x < 0.5 ?
       8.0 * pow(x, 4.0) 
     : 1.0 - pow(-2.0 * x + 2.0, 4.0) / 2.0;
 }
 
+// combines a few different easing functions to create a bouncing effect
 float easeOutBounce(float x) {
 float n1 = 7.5625;
 float d1 = 2.75;
@@ -30,6 +31,7 @@ if (x < 1.0 / d1) {
 }
 }
 
+// eases in and out with a few different easing functions
 float easeInOutBounce(float x) {
 return x < 0.5
   ? (1.0 - easeOutBounce(1.0 - 2.0 * x)) / 2.0
