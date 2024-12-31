@@ -11,7 +11,10 @@ uniform float u_time;
 
 // make a new circle, splat into a vec3 to get color information
 float circle(in vec2 uv, in vec2 coords, in float radius) {
-    return step(distance(uv, coords), radius);
+    vec2 dist = uv-vec2(coords);
+	return 1.-smoothstep(radius-(radius*0.01),
+                         radius+(radius*0.01),
+                         dot(dist,dist)*4.0);
 }
 
 void MakeCircle(in vec2 uv, in vec2 coords, in float radius, in vec3 circleColor, inout vec3 pixelColor) {
